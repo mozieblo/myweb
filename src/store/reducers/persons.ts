@@ -1,11 +1,21 @@
 import * as actionTypes from '../constants/actionTypes';
 import { StartAdd, StartDelete } from "../actions";
 
-export const initialState = {
+export interface IInitialState {
+    persons: PersonsArray[]
+}
+
+export type PersonsArray = {
+    id: number,
+    name: string,
+    age: number
+}
+
+export const initialState: IInitialState = {
     persons: []
 };
 
-const reducer = (state = initialState, action: StartAdd | StartDelete) => {
+export default (state: IInitialState = initialState, action: StartAdd | StartDelete) => {
     switch (action.type) {
         case actionTypes.ADD_PERSON:
             const newPerson = {
@@ -14,10 +24,10 @@ const reducer = (state = initialState, action: StartAdd | StartDelete) => {
                 age: action.personData.age /*Math.floor( Math.random() * 40 )*/
             };
             return {
-                persons: state.persons.concat(newPerson as any)
+                persons: state.persons.concat(newPerson)
             };
         case actionTypes.DELETE_PERSON:
-            const updatedArray = state.persons.filter((person: any) => person.id !== action.id);
+            const updatedArray = state.persons.filter((person: PersonsArray) => person.id !== action.id);
             return {
                 persons: updatedArray
             };
@@ -25,5 +35,3 @@ const reducer = (state = initialState, action: StartAdd | StartDelete) => {
             return state;
     }
 };
-
-export default reducer;

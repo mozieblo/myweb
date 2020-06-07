@@ -27,7 +27,7 @@ export const saveAddPerson = ( name: string, age: number ) => {
 };
 
 export const addPerson = ( name: string, age: number ) => {
-    return (dispatch: (saveAddPerson1: { personData: { name: string; age: number }; type: string }) => object)=> {
+    return (dispatch: (saveAddPerson1: { personData: { name: string; age: number }; type: string }) => object) => {
         setTimeout( () => {
             dispatch(saveAddPerson( name, age ))
         }, 2000)

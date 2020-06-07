@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import Person from '../components/Person/Person';
 import AddPerson from '../components/AddPerson/AddPerson';
 import * as actionCreators from '../store/actions';
+import { PersonsArray, IInitialState } from '../store/reducers/persons';
 
 interface PropsPersons {
-    persons: [],
+    persons: PersonsArray[],
     addPersonHandler: ( name: string, age: number ) => object,
     deletePersonHandler: ( personId: number ) => object
 }
@@ -15,7 +16,7 @@ class Persons extends Component<PropsPersons> {
         return (
             <div>
                 <AddPerson personAdded={this.props.addPersonHandler} />
-                {this.props.persons && this.props.persons.map((person: any) => {
+                {this.props.persons && this.props.persons.map((person: PersonsArray) => {
                     return (
                     <Person
                         key={person.id}
@@ -30,7 +31,7 @@ class Persons extends Component<PropsPersons> {
 
 const mapStateToProps = (state: any) => {
     return {
-      persons: state.reducer.persons
+      persons: state.persons.persons
     }
 };
 
